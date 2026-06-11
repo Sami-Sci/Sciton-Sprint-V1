@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sciton Sprint</title>
 
 <style>
@@ -10,35 +10,46 @@ body{
 font-family:Arial,sans-serif;
 background:#f5f7fa;
 margin:0;
-padding:40px;
-max-width:1000px;
+padding:20px;
+max-width:900px;
 margin:auto;
 }
 
 h1{
-color:#0B5ED7;
+color:#0057B8;
 }
 
 .card{
 background:white;
 padding:20px;
 border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
+box-shadow:0 2px 10px rgba(0,0,0,.1);
 margin-top:20px;
 }
 
 button{
-background:#0B5ED7;
+background:#0057B8;
 color:white;
 border:none;
-padding:12px 20px;
+padding:12px 16px;
 border-radius:8px;
 cursor:pointer;
-margin-top:10px;
+margin:6px 0;
+display:block;
+width:100%;
 }
 
 button:hover{
 opacity:.9;
+}
+
+#questionBox{
+display:none;
+}
+
+#explanation{
+margin-top:15px;
+font-style:italic;
 }
 </style>
 </head>
@@ -46,31 +57,209 @@ opacity:.9;
 <body>
 
 <h1>Sciton Sprint</h1>
+<p>Train Like A Territory Manager</p>
 
-<p>
-From Clinical Condition → Modality → Outcome → Practice Value → ROI
-</p>
+<div class="card" id="home">
 
-<div class="card">
+<h2>Select Category</h2>
 
-<h2>Choose Training Mode</h2>
-
-<ul>
-<li>Clinical Conditions</li>
-<li>Modality Mastery</li>
-<li>Treatment Stacking</li>
-<li>Ride Day Simulator</li>
-<li>Territory Manager Mode</li>
-<li>ROI & Practice Growth</li>
-<li>Objection Handling</li>
-<li>Sciton Story</li>
-</ul>
-
-<button onclick="alert('Sciton Sprint V1 Coming Soon')">
-Start Training
-</button>
+<button onclick="loadCategory('clinical')">Clinical Conditions</button>
+<button onclick="loadCategory('modalities')">Modalities</button>
+<button onclick="loadCategory('roi')">ROI & Practice Growth</button>
+<button onclick="loadCategory('objections')">Objection Handling</button>
 
 </div>
+
+<div class="card" id="questionBox">
+
+<h2 id="categoryTitle"></h2>
+
+<h3 id="question"></h3>
+
+<div id="answers"></div>
+
+<div id="explanation"></div>
+
+<button onclick="nextQuestion()">Next Question</button>
+
+</div>
+
+<script>
+
+let currentCategory = '';
+let currentQuestion = 0;
+
+const data = {
+
+clinical: [
+
+{
+q:"Patient has rosacea and visible vessels. First modality?",
+a:["Halo","ClearV","Moxi","SkinTyte"],
+correct:1,
+e:"ClearV specializes in vascular concerns including vessels and rosacea."
+},
+
+{
+q:"Patient wants prevention and minimal downtime.",
+a:["ProFractional","Halo","Moxi","ClearV"],
+correct:2,
+e:"Moxi is ideal for preventative aging and maintenance."
+},
+
+{
+q:"Patient presents with acne scars and texture concerns.",
+a:["ProFractional","BBL","ClearSilk","SkinTyte"],
+correct:0,
+e:"ProFractional is a strong option for acne scars and deeper resurfacing."
+}
+
+],
+
+modalities: [
+
+{
+q:"What is Halo primarily known for?",
+a:["Hair Removal","Women's Health","Comprehensive Correction","Tattoo Removal"],
+correct:2,
+e:"Halo combines 1470 and 2940 wavelengths for comprehensive correction."
+},
+
+{
+q:"What is BBL best known for?",
+a:["Color Correction","Acne Scars","Skin Tightening","Women's Health"],
+correct:0,
+e:"BBL is known for pigment and color correction."
+},
+
+{
+q:"What is the primary benefit of HERO compared to traditional BBL?",
+a:["Women's Health","Larger spot size and speed","Tightening","Fractional Resurfacing"],
+correct:1,
+e:"HERO introduced larger spot sizes and faster treatment speeds."
+}
+
+],
+
+roi: [
+
+{
+q:"Why do treatment packages matter?",
+a:["More paperwork","Recurring revenue and better outcomes","Lower retention","No benefit"],
+correct:1,
+e:"Packages improve patient outcomes while increasing recurring revenue."
+},
+
+{
+q:"Why discuss treating multiple zones?",
+a:["Different logo","More value to patients and the practice","No reason","Faster laser"],
+correct:1,
+e:"Additional treatment zones can improve outcomes and practice growth."
+}
+
+],
+
+objections: [
+
+{
+q:"Doctor says: 'All these devices sound the same.'",
+a:[
+"They are",
+"Different technologies solve different patient concerns",
+"Different logos",
+"Different colors"
+],
+correct:1,
+e:"Focus on outcomes, downtime, indications and patient goals."
+},
+
+{
+q:"Doctor says: 'My patients don't ask for this.'",
+a:[
+"End conversation",
+"Discuss patient education and demand creation",
+"Agree",
+"Lower prices"
+],
+correct:1,
+e:"Many successful practices create awareness and demand through education."
+}
+
+]
+
+};
+
+function loadCategory(cat){
+
+currentCategory = cat;
+currentQuestion = 0;
+
+document.getElementById("home").style.display="none";
+document.getElementById("questionBox").style.display="block";
+
+document.getElementById("categoryTitle").innerText=cat.toUpperCase();
+
+showQuestion();
+
+}
+
+function showQuestion(){
+
+let q=data[currentCategory][currentQuestion];
+
+document.getElementById("question").innerText=q.q;
+
+let answers="";
+
+q.a.forEach((answer,index)=>{
+
+answers += `<button onclick="checkAnswer(${index})">${answer}</button>`;
+
+});
+
+document.getElementById("answers").innerHTML=answers;
+
+document.getElementById("explanation").innerHTML="";
+
+}
+
+function checkAnswer(index){
+
+let q=data[currentCategory][currentQuestion];
+
+if(index===q.correct){
+
+document.getElementById("explanation").innerHTML=
+"✅ Correct<br><br>"+q.e;
+
+}else{
+
+document.getElementById("explanation").innerHTML=
+"❌ Not Quite<br><br>"+q.e;
+
+}
+
+}
+
+function nextQuestion(){
+
+currentQuestion++;
+
+if(currentQuestion >= data[currentCategory].length){
+
+alert("Category Complete");
+
+location.reload();
+
+return;
+
+}
+
+showQuestion();
+
+}
+
+</script>
 
 </body>
 </html>
