@@ -61,12 +61,27 @@ font-style:italic;
 
 <div class="card" id="home">
 
-<h2>Select Category</h2>
+<h2>Academy Modules</h2>
 
-<button onclick="loadCategory('clinical')">Clinical Conditions</button>
-<button onclick="loadCategory('modalities')">Modalities</button>
-<button onclick="loadCategory('roi')">ROI & Practice Growth</button>
-<button onclick="loadCategory('objections')">Objection Handling</button>
+<button onclick="loadCategory('history')">🏛️ Sciton Story</button>
+
+<button onclick="loadCategory('science')">🧬 Medical Aesthetics Science</button>
+
+<button onclick="loadCategory('devices')">⚡ Device Mastery</button>
+
+<button onclick="loadCategory('clinical')">🏥 Clinical Conditions</button>
+
+<button onclick="loadCategory('stacking')">🔗 Treatment Stacking</button>
+
+<button onclick="loadCategory('territory')">🗺️ Territory Manager Mode</button>
+
+<button onclick="loadCategory('roi')">📈 Practice Growth & ROI</button>
+
+<button onclick="loadCategory('objections')">🧠 Discovery & Objection Handling</button>
+
+<button onclick="loadCategory('rideday')">🚗 Ride Day Simulator</button>
+
+<button onclick="loadCategory('senior')">👔 Senior ASM Mode</button>
 
 </div>
 
@@ -91,98 +106,235 @@ let currentQuestion = 0;
 
 const data = {
 
-clinical: [
+history: [
 
 {
-q:"Patient has rosacea and visible vessels. First modality?",
+q:"Before Sciton existed, Dr. Jim Hobart co-founded which company in 1966?",
+a:["Candela","Coherent","Lumenis","Cutera"],
+correct:1,
+e:"Coherent was founded in 1966 and became a foundational part of Sciton's story."
+},
+
+{
+q:"Sciton was founded in what year?",
+a:["1988","1993","1997","2001"],
+correct:2,
+e:"Sciton was founded in 1997 by Dr. Jim Hobart and Dr. Dan Negus."
+}
+,
+
+{
+q:"Who co-founded Sciton alongside Dr. Jim Hobart?",
+a:[
+"David Percival",
+"Aaron Burton",
+"Dan Negus",
+"Rox Anderson"
+],
+correct:2,
+e:"Dr. Dan Negus co-founded Sciton alongside Dr. Jim Hobart in 1997 after helping lead research and development efforts at Coherent."
+},
+
+{
+q:"What year did Coherent enter the medical laser market?",
+a:[
+"1966",
+"1974",
+"1988",
+"1997"
+],
+correct:1,
+e:"Coherent expanded into the medical laser space in 1974."
+},
+
+{
+q:"Where is Sciton headquartered?",
+a:[
+"Toronto",
+"Austin",
+"Palo Alto",
+"San Diego"
+],
+correct:2,
+e:"Sciton is headquartered in Palo Alto, California."
+},
+
+{
+q:"What mission is most associated with Sciton?",
+a:[
+"Sell premium devices",
+"Improve people's lives",
+"Become the largest laser company",
+"Lower treatment costs"
+],
+correct:1,
+e:"Improving people's lives is a core philosophy of Sciton."
+}
+],
+
+science:[
+
+{
+q:"Which chromophore is primarily targeted when treating pigment?",
+a:["Water","Hemoglobin","Melanin","Collagen"],
+correct:2,
+e:"Melanin is the primary chromophore involved in pigment correction."
+},
+
+{
+q:"Which chromophore is primarily targeted by ClearV?",
+a:["Water","Melanin","Hemoglobin","Fat"],
+correct:2,
+e:"ClearV focuses on vascular concerns by targeting hemoglobin."
+}
+
+],
+
+devices:[
+
+{
+q:"What makes Halo unique?",
+a:[
+"Fastest IPL",
+"World's first hybrid fractional laser",
+"Skin tightening device",
+"Women's health platform"
+],
+correct:1,
+e:"Halo combines 1470 and 2940 wavelengths in a hybrid fractional approach."
+},
+
+{
+q:"What was the major innovation introduced with HERO?",
+a:[
+"Women's health",
+"Larger spot size and faster treatment speed",
+"Tightening",
+"Fractional resurfacing"
+],
+correct:1,
+e:"HERO increased speed and treatment coverage through larger spot sizes."
+}
+
+],
+
+clinical:[
+
+{
+q:"Patient presents with visible vessels and rosacea. First modality?",
 a:["Halo","ClearV","Moxi","SkinTyte"],
 correct:1,
-e:"ClearV specializes in vascular concerns including vessels and rosacea."
+e:"ClearV is specifically designed for vascular concerns."
 },
 
 {
 q:"Patient wants prevention and minimal downtime.",
-a:["ProFractional","Halo","Moxi","ClearV"],
+a:["Halo","ProFractional","Moxi","Contour TRL"],
 correct:2,
-e:"Moxi is ideal for preventative aging and maintenance."
-},
-
-{
-q:"Patient presents with acne scars and texture concerns.",
-a:["ProFractional","BBL","ClearSilk","SkinTyte"],
-correct:0,
-e:"ProFractional is a strong option for acne scars and deeper resurfacing."
+e:"Moxi is ideal for prevention and maintenance."
 }
 
 ],
 
-modalities: [
+stacking:[
 
 {
-q:"What is Halo primarily known for?",
-a:["Hair Removal","Women's Health","Comprehensive Correction","Tattoo Removal"],
-correct:2,
-e:"Halo combines 1470 and 2940 wavelengths for comprehensive correction."
-},
-
-{
-q:"What is BBL best known for?",
-a:["Color Correction","Acne Scars","Skin Tightening","Women's Health"],
+q:"Patient has pigment, pores, and texture concerns. Most comprehensive approach?",
+a:["BBL + Halo","ClearV","SkinTyte","Moxi Only"],
 correct:0,
-e:"BBL is known for pigment and color correction."
-},
-
-{
-q:"What is the primary benefit of HERO compared to traditional BBL?",
-a:["Women's Health","Larger spot size and speed","Tightening","Fractional Resurfacing"],
-correct:1,
-e:"HERO introduced larger spot sizes and faster treatment speeds."
+e:"BBL addresses color while Halo addresses texture and remodeling."
 }
 
 ],
 
-roi: [
+territory:[
 
 {
-q:"Why do treatment packages matter?",
-a:["More paperwork","Recurring revenue and better outcomes","Lower retention","No benefit"],
+q:"A clinic only treats the face. What opportunity exists?",
+a:[
+"Lower pricing",
+"Additional treatment zones",
+"Different logo",
+"No opportunity"
+],
 correct:1,
-e:"Packages improve patient outcomes while increasing recurring revenue."
-},
+e:"Neck, chest, hands and body zones often represent growth opportunities."
+}
+
+],
+
+roi:[
 
 {
 q:"Why discuss treating multiple zones?",
-a:["Different logo","More value to patients and the practice","No reason","Faster laser"],
-correct:1,
-e:"Additional treatment zones can improve outcomes and practice growth."
+a:[
+"More value to patients and the practice",
+"Different branding",
+"Faster treatment",
+"No reason"
+],
+correct:0,
+e:"Additional zones can improve outcomes and increase practice revenue."
 }
 
 ],
 
-objections: [
+objections:[
 
 {
-q:"Doctor says: 'All these devices sound the same.'",
+q:"Doctor says Halo is too expensive. What's the best next step?",
 a:[
-"They are",
-"Different technologies solve different patient concerns",
-"Different logos",
-"Different colors"
+"Offer discount",
+"Explain technology",
+"Understand how they evaluate ROI",
+"Leave"
 ],
-correct:1,
-e:"Focus on outcomes, downtime, indications and patient goals."
+correct:2,
+e:"Discovery before positioning."
 },
 
 {
-q:"Doctor says: 'My patients don't ask for this.'",
+q:"Doctor says patients don't ask for Halo. What's the best follow-up question?",
 a:[
-"End conversation",
-"Discuss patient education and demand creation",
-"Agree",
-"Lower prices"
+"Would they if they knew it existed?",
+"What concerns are patients discussing most often?",
+"Then you don't need Halo",
+"Lower pricing"
 ],
 correct:1,
-e:"Many successful practices create awareness and demand through education."
+e:"Conditions drive technology adoption."
+}
+
+],
+
+rideday:[
+
+{
+q:"Clinic owns BBL HEROic and Moxi. Patients complain about texture and pores. What's the opportunity?",
+a:[
+"Another BBL",
+"Halo",
+"ClearV",
+"SkinTyte"
+],
+correct:1,
+e:"Halo expands into corrective resurfacing and collagen remodeling."
+}
+
+],
+
+senior:[
+
+{
+q:"A doctor says: 'I need another device.' What should you identify first?",
+a:[
+"Budget",
+"Clinical conditions not being treated",
+"Instagram followers",
+"Office size"
+],
+correct:1,
+e:"Condition → Modality → Outcome → Practice Value → ROI."
 }
 
 ]
